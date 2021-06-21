@@ -1,0 +1,12 @@
+{
+  "name": "freeboard__frontend",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/hahaniceguy/codecamp_1.git",
+  "author": "hahaniceguy <hahanicegu@naver.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
