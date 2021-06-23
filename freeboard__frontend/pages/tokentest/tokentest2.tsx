@@ -2,10 +2,23 @@ import {useQuery} from '@apollo/client';
 import {useRouter} from 'next/router';
 import {useContext, useEffect} from 'react';
 import {GlobalContext} from '../_app';
+import {gql} from '@apollo/client';
+
+const FETCH_USEDITEMS = gql`
+    query fetchUseditems {
+        fetchUseditems {
+            _id
+            name
+        }
+    }
+`;
 
 //* 회원만 볼 수 있는 페이지
-const TokenTest2Page = () => {
+const TokenTest2Page = (props) => {
+    const router = useRouter();
+
     const {data} = useQuery(FETCH_USEDITEMS);
+    console.log('data', data);
 
     const onClickMove = () => {
         router.push('/tokentest/tokentest1');

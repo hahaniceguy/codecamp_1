@@ -7,11 +7,11 @@ import {GlobalContext} from '../_app';
 export default function ItemlistPage() {
     const router = useRouter();
     const {token} = useContext(GlobalContext);
-    if (token) {
-        return <Itemlist></Itemlist>;
-    }
-    useEffect(() => {
-        router.push(`/board`);
-    }, []);
-    return <div />;
+    // if (token) {
+    return <Itemlist></Itemlist>;
+    // }
+    // useEffect(() => {
+    //     router.push(`/board`);
+    // }, []);
+    // return <div />;
 }

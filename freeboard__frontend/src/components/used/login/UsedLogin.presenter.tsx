@@ -75,6 +75,8 @@ export default function LoginPageUI({onclick, handleInput, input}) {
         const token = await loginUser({
             variables: {email: inputs.email, password: inputs.password},
         });
+        console.log(token);
+
         setToken(token.data.loginUser.accessToken);
         onclick();
         router.push(`/Itemlist`);
@@ -111,7 +113,11 @@ export default function LoginPageUI({onclick, handleInput, input}) {
                     <LoginCheckimg src="/loginon.png"></LoginCheckimg>
                     <LoginCheckcheck>로그인 상태 유지</LoginCheckcheck>
                 </LoginCheckWrapper>
-                <LoginButton type="button" onClick={onClickLogin}>
+                {/* <LoginButton type="button" onClick={onClickLogin}> */}
+                <LoginButton
+                    onClick={onClickLogin}
+                    isActive={errors.email === '' && errors.password === ''}
+                >
                     로그인하기
                 </LoginButton>
                 <DivideLine></DivideLine>

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import LoginPageUI from './UsedLogin.presenter';
 
-export default function LoginPage({isModalVisible, onclick}) {
+export default function LoginPage({loginVisible, onclick}) {
     const [input, setInput] = useState({
         email: '',
         password: '',
@@ -16,7 +16,7 @@ export default function LoginPage({isModalVisible, onclick}) {
 
     return (
         <>
-            {isModalVisible && (
+            {loginVisible && (
                 <LoginPageUI
                     onclick={onclick}
                     handleInput={handleInput}
