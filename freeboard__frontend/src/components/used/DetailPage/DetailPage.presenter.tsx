@@ -44,7 +44,9 @@ export default function DetailPageUI({data}) {
                     <ProfileImg src="/profileImg.png"></ProfileImg>
                     <SaleDateWrapper>
                         <SaleMan>{data?.fetchUseditem.seller.name}</SaleMan>
-                        <Date>{data?.fetchUseditem.createAt}</Date>
+                        <Date>
+                            {data?.fetchUseditem.createdAt.slice(0, 10)}
+                        </Date>
                     </SaleDateWrapper>
                 </ProfileWrapper>
                 <ImgWrapper>
@@ -65,7 +67,7 @@ export default function DetailPageUI({data}) {
                     <LikeCount>20</LikeCount>
                 </LikeWrapper>
             </SaleLikeWrapper>
-            <MoneyCount>{data?.fetchUseditem.price}</MoneyCount>
+            <MoneyCount>{data?.fetchUseditem.price}원</MoneyCount>
             <ItemImg src="/gtap.png"></ItemImg>
             <ItemSmallImgWrapper>
                 <ItemSmallImg
@@ -83,7 +85,12 @@ export default function DetailPageUI({data}) {
                 <ItemSmallImg src="/galt4.png"></ItemSmallImg>
             </ItemSmallImgWrapper>
             <ContentsWrapper>
-                <Contents>{data?.fetchUseditem.contents}</Contents>
+                <Contents
+                    dangerouslySetInnerHTML={{
+                        __html: data?.fetchUseditem.contents,
+                    }}
+                />
+                {/* <Contents>{data?.fetchUseditem.contents}</Contents> */}
                 <Tag>{data?.fetchUseditem.tags}</Tag>
             </ContentsWrapper>
             <DivideLine></DivideLine>

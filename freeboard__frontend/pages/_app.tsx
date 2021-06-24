@@ -26,7 +26,7 @@ function MyApp({Component, pageProps}) {
         // headers: {authorization: `Bearer ${token}`},
         headers: {
             authorization:
-                'Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJkOGFhNDYyNzA2MjAwMjkxMTA4MzMiLCJwZXJtaXNzaW9uIjowLCJpYXQiOjE2MjQ0Mzc4ODIsImV4cCI6MTYyNDQ0MTQ4Miwic3ViIjoiYWNjZXNzVG9rZW4ifQ.dDAhzhVQSF8S-wdljV7AygMl5uMTDKJqEdl8er4uadYuP4WCK6IZiulKefvSMcdx-MGmdMehRe-M8mBI6Bdjtg',
+                'Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJkOGFhNDYyNzA2MjAwMjkxMTA4MzMiLCJwZXJtaXNzaW9uIjowLCJpYXQiOjE2MjQ0OTU2MDksImV4cCI6MTYyNDQ5OTIwOSwic3ViIjoiYWNjZXNzVG9rZW4ifQ.Tosw8BUVxTSvmd5tqwDhL8Wz-JIKJywC8uwfjps78ssiviqqz7Op7iM5Q-_WIOEU3FAuRdj3uZRQSpsrxg5GMw',
         },
         credentials: 'include',
     });
