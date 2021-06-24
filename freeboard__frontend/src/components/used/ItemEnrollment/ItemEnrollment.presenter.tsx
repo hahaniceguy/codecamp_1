@@ -57,6 +57,7 @@ export default function ItemEnrollemntUI({
     haleClickOn,
     handleClickOff,
     hostRef,
+    updata,
 }) {
     return (
         <Wrapper>
@@ -68,6 +69,7 @@ export default function ItemEnrollemntUI({
                     name="name"
                     placeholder="상품명을 작성해주세요."
                     onChange={handleChangeInput}
+                    defaultValue={updata ? updata.fetchUseditem.name : ''}
                 ></ItemNameBox>
                 <OnePoint>한줄요약</OnePoint>
                 <OnePointWrapper
@@ -75,11 +77,17 @@ export default function ItemEnrollemntUI({
                     name="remarks"
                     placeholder="상품명을 작성해주세요."
                     onChange={handleChangeInput}
+                    defaultValue={updata ? updata.fetchUseditem.remarks : ''}
                 ></OnePointWrapper>
                 <ItemExplanation>상품설명</ItemExplanation>
-
                 <ReactQuillWrapper>
-                    <ReactQuill style={{height: 250}} onChange={saveContents} />
+                    <ReactQuill
+                        style={{height: 250}}
+                        onChange={saveContents}
+                        defaultValue={
+                            updata ? updata.fetchUseditem.contents : ''
+                        }
+                    />
                 </ReactQuillWrapper>
                 {/* <ItemExplanationBox
                     name="contents"
@@ -92,6 +100,7 @@ export default function ItemEnrollemntUI({
                     name="price"
                     placeholder="판매 가격을 입력해주세요."
                     onChange={handleChangeInput}
+                    defaultValue={updata ? updata.fetchUseditem.price : ''}
                 ></SellCountBox>
                 <Tag>태그입력</Tag>
                 <TagBox
@@ -99,6 +108,7 @@ export default function ItemEnrollemntUI({
                     name="tags"
                     placeholder="#태그 #태그 #태그"
                     onChange={handleChangeInput}
+                    defaultValue={updata ? updata.fetchUseditem.tags : ''}
                 ></TagBox>
                 <TradeNaviWrapper>
                     <TradeMapWrapper>

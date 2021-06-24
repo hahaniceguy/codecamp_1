@@ -1,4 +1,4 @@
-import {useMutation} from '@apollo/client';
+import {useMutation, useQuery} from '@apollo/client';
 import {useRouter} from 'next/router';
 import {useState, useRef} from 'react';
 import {
@@ -6,12 +6,19 @@ import {
     MutationCreateUseditemArgs,
 } from '../../../commons/types/generated/types';
 import ItemEnrollemntUI from './ItemEnrollment.presenter';
-import {CREATE_USED_ITEM} from './ItemEnrollment.queries';
+import {
+    CREATE_USED_ITEM,
+    FETCH_USED_ITEM,
+    UPDATE_USED_ITEM,
+} from './ItemEnrollment.queries';
 
 export default function ItemEnrollemnt() {
     const router = useRouter();
-
     const [createUseditem] = useMutation(CREATE_USED_ITEM);
+    const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
+    const {data: updata} = useQuery(FETCH_USED_ITEM, {
+        variables: {useditemId: String(router.query.id)},
+    });
     const [click, setClick] = useState(false);
     const [input, setInput] = useState({
         name: '',
@@ -20,12 +27,12 @@ export default function ItemEnrollemnt() {
         price: '',
         tags: '',
     });
+
     const saveContents = (contents) => {
         const inputs = {...input};
         inputs.contents = contents;
         setInput(inputs);
     };
-    console.log(input);
 
     const handleChangeInput = (event) => {
         setInput((prev) => ({
@@ -50,6 +57,28 @@ export default function ItemEnrollemnt() {
             });
             alert('상품 등록');
             router.push(`/ItemEnrollment`);
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+    const handleUpdateItem = async () => {
+        try {
+            const result = await updateUseditem({
+                variables: {
+                    updateUseditemInput: {
+                        name: input.name,
+                        remarks: input.remarks,
+                        contents: input.contents,
+                        price: Number(input.price),
+                        tags: [input.tags],
+                    },
+                    useditemId: String(router.query.id),
+                },
+            });
+            alert('상품 수정');
+            //@ts-ignore
+            router.push(`/ItemEnrollment/${result.updata.updateUseditem._id}`);
         } catch (error) {
             alert(error.message);
         }
@@ -96,6 +125,7 @@ export default function ItemEnrollemnt() {
             haleClickOn={haleClickOn}
             handleClickOff={handleClickOff}
             hostRef={hostRef}
+            updata={updata}
         ></ItemEnrollemntUI>
     );
 }

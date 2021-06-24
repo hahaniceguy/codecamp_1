@@ -29,9 +29,14 @@ import {
     Purchase,
     ButtonWrapper,
     ContentsWrapper,
+    MoneyCountWrapper,
 } from './DetailPage.styles';
 
-export default function DetailPageUI({data}) {
+export default function DetailPageUI({
+    data,
+    handleClickMoveListPage,
+    handleClickUpdatePage,
+}) {
     return (
         <Wrapper>
             <Address>
@@ -67,7 +72,9 @@ export default function DetailPageUI({data}) {
                     <LikeCount>20</LikeCount>
                 </LikeWrapper>
             </SaleLikeWrapper>
-            <MoneyCount>{data?.fetchUseditem.price}원</MoneyCount>
+            <MoneyCountWrapper>
+                <MoneyCount>{data?.fetchUseditem.price}원</MoneyCount>
+            </MoneyCountWrapper>
             <ItemImg src="/gtap.png"></ItemImg>
             <ItemSmallImgWrapper>
                 <ItemSmallImg
@@ -97,8 +104,14 @@ export default function DetailPageUI({data}) {
             <Map src="/map.png"></Map>
             <DivideLine></DivideLine>
             <ButtonWrapper>
-                <ListPage>목록으로</ListPage>
-                <Purchase>구매하기</Purchase>
+                <ListPage onClick={handleClickMoveListPage}>목록으로</ListPage>
+                {data ? (
+                    <Purchase onClick={handleClickUpdatePage}>
+                        수정하기
+                    </Purchase>
+                ) : (
+                    <Purchase>구매하기</Purchase>
+                )}
             </ButtonWrapper>
         </Wrapper>
     );

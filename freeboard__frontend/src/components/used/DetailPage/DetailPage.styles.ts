@@ -212,3 +212,7 @@ export const ButtonWrapper = styled.div`
     flex-direction: row;
     margin-bottom: 80px;
 `;
+
+export const MoneyCountWrapper = styled.div`
+    width: 792px;
+`;

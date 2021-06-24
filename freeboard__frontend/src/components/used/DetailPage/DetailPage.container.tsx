@@ -12,9 +12,22 @@ export default function DetailPage() {
     });
     console.log(data, 'router.query.id');
 
+    const handleClickMoveListPage = () => {
+        router.push(`/Itemlist`);
+    };
+
+    const handleClickUpdatePage = () => {
+        router.push(`/detail/${data.fetchUseditem._id}/edit`);
+    };
+    console.log(data, 'console');
+
     return (
         <>
-            <DetailPageUI data={data} />
+            <DetailPageUI
+                data={data}
+                handleClickMoveListPage={handleClickMoveListPage}
+                handleClickUpdatePage={handleClickUpdatePage}
+            />
             <CommentUI></CommentUI>
         </>
     );
