@@ -28,7 +28,6 @@ export default function CommentUI({
     handleClickRating,
     onLoadMore,
 }) {
-    // console.log(comment?.fetchBoardComments, "댓글")
     return (
         <WrapperBoss>
             <CommentWrapper>

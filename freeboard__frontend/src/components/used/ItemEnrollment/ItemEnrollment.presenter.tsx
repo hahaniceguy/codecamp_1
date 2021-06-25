@@ -38,6 +38,9 @@ import {
     DaumXimg,
     DaumXimgWrapper,
     ReactQuillWrapper,
+    DetailAdress,
+    CancleButton,
+    UpdataButtonWrapper,
 } from './ItemEnrollment.styles';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
@@ -58,10 +61,17 @@ export default function ItemEnrollemntUI({
     handleClickOff,
     hostRef,
     updata,
+    input,
+    handleUpdateItem,
+    handleCancle,
 }) {
     return (
         <Wrapper>
-            <ItemTitle>상품 등록하기</ItemTitle>
+            {updata ? (
+                <ItemTitle>상품 수정하기</ItemTitle>
+            ) : (
+                <ItemTitle>상품 등록하기</ItemTitle>
+            )}
             <MiniWrapper>
                 <ItemName>상품명</ItemName>
                 <ItemNameBox
@@ -84,9 +94,7 @@ export default function ItemEnrollemntUI({
                     <ReactQuill
                         style={{height: 250}}
                         onChange={saveContents}
-                        defaultValue={
-                            updata ? updata.fetchUseditem.contents : ''
-                        }
+                        value={input.contents}
                     />
                 </ReactQuillWrapper>
                 {/* <ItemExplanationBox
@@ -138,6 +146,7 @@ export default function ItemEnrollemntUI({
                             )}
                         </AddressCodeWrapper>
                         <AddressBox ref={hostRef} />
+                        <DetailAdress>상세 주소</DetailAdress>
                         <AddressBox2 />
                     </AddressWrapper>
                 </TradeNaviWrapper>
@@ -159,9 +168,21 @@ export default function ItemEnrollemntUI({
                     <ButtonName>사진 2</ButtonName>
                 </ButtonWrapper>
             </MiniWrapper>
-            <Enrollment onClick={handleClickCreateUsedItem}>
-                등록하기
-            </Enrollment>
+            {updata ? (
+                <UpdataButtonWrapper>
+                    <CancleButton onClick={handleCancle}>취소하기</CancleButton>
+                    <Enrollment
+                        style={{backgroundColor: '#ffd600'}}
+                        onClick={handleUpdateItem}
+                    >
+                        수정하기
+                    </Enrollment>
+                </UpdataButtonWrapper>
+            ) : (
+                <Enrollment onClick={handleClickCreateUsedItem}>
+                    등록하기
+                </Enrollment>
+            )}
         </Wrapper>
     );
 }

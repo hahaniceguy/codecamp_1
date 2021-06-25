@@ -39,7 +39,7 @@ export const UPDATE_USED_ITEM = gql`
     ) {
         updateUseditem(
             updateUseditemInput: $updateUseditemInput
-            updateUseditemInput: $updateUseditemInput
+            useditemId: $useditemId
         ) {
             _id
             name

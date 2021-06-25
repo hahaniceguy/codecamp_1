@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from '@apollo/client';
 import {useRouter} from 'next/router';
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import {
     Mutation,
     MutationCreateUseditemArgs,
@@ -12,6 +12,14 @@ import {
     UPDATE_USED_ITEM,
 } from './ItemEnrollment.queries';
 
+const initInput = {
+    name: '',
+    remarks: '',
+    contents: '',
+    price: '',
+    tags: '',
+};
+
 export default function ItemEnrollemnt() {
     const router = useRouter();
     const [createUseditem] = useMutation(CREATE_USED_ITEM);
@@ -20,13 +28,16 @@ export default function ItemEnrollemnt() {
         variables: {useditemId: String(router.query.id)},
     });
     const [click, setClick] = useState(false);
-    const [input, setInput] = useState({
-        name: '',
-        remarks: '',
-        contents: '',
-        price: '',
-        tags: '',
-    });
+    const [input, setInput] = useState(initInput);
+
+    useEffect(() => {
+        if (updata) {
+            const inputs = {...input};
+            inputs.contents = updata.fetchUseditem.contents;
+
+            setInput(inputs);
+        }
+    }, [updata]);
 
     const saveContents = (contents) => {
         const inputs = {...input};
@@ -40,6 +51,10 @@ export default function ItemEnrollemnt() {
             [event.target.name]: event.target.value,
         }));
         // console.log(event.target.value);
+    };
+
+    const handleCancle = () => {
+        router.push(`/Itemlist`);
     };
 
     const handleClickCreateUsedItem = async () => {
@@ -77,8 +92,9 @@ export default function ItemEnrollemnt() {
                 },
             });
             alert('상품 수정');
+            console.log(result);
             //@ts-ignore
-            router.push(`/ItemEnrollment/${result.updata.updateUseditem._id}`);
+            router.push(`/detail/${result.data.updateUseditem._id}`);
         } catch (error) {
             alert(error.message);
         }
@@ -115,17 +131,21 @@ export default function ItemEnrollemnt() {
         console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
+    console.log(input);
     return (
         <ItemEnrollemntUI
             handleClickCreateUsedItem={handleClickCreateUsedItem}
             handleChangeInput={handleChangeInput}
             saveContents={saveContents}
+            input={input}
             handleComplete={handleComplete}
             click={click}
             haleClickOn={haleClickOn}
             handleClickOff={handleClickOff}
             hostRef={hostRef}
             updata={updata}
+            handleUpdateItem={handleUpdateItem}
+            handleCancle={handleCancle}
         ></ItemEnrollemntUI>
     );
 }

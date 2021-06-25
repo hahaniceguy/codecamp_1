@@ -1,5 +1,5 @@
 import {UPDATE_COMMENTBOARD, DELETE_COMMENTBOARD} from './Comment.queries';
-import {useMutation, useQuery} from '@apollo/client';
+import {useMutation} from '@apollo/client';
 import {useRouter} from 'next/router';
 import {
     CommentListWrapper,
@@ -29,7 +29,7 @@ import {
     ModalPassword,
     ModalWrapper,
 } from './Comment.styles';
-import {} from './Comment.container';
+// import {} from './Comment.container';
 import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {Modal, Button} from 'antd';

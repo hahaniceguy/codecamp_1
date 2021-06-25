@@ -18,6 +18,15 @@ import {
     ProfileWrapper,
     CommentImg,
     WriterImgWrapper,
+    CommentDeleteImg,
+    CommentImgWrapper,
+    UpdateWrapper,
+    UpdateBox,
+    UpdataCommnetBox,
+    UpdateDivideLine,
+    UpdateLength,
+    UpdateButton,
+    UpdateButtonWrapper,
 } from './Comment.style';
 
 export default function CommentUI({
@@ -25,6 +34,10 @@ export default function CommentUI({
     writeQuestion,
     data,
     contentRef,
+    ModifyQuestion,
+    isEdit,
+    handleUpdateComment,
+    handleDeleteComment,
 }) {
     return (
         <>
@@ -50,23 +63,86 @@ export default function CommentUI({
                 </CommentBoxWrapper>
 
                 {data?.fetchUseditemQuestions?.map((question, key) => {
-                    console.log(question);
                     return (
                         <div key={key}>
-                            <WriterImgWrapper>
-                                <ProfileWrapper>
-                                    <ProfileImg src="/profileImg.png"></ProfileImg>
-                                    <WriterCommentWrapper>
-                                        <Writer>{question.user.name}</Writer>
-                                        <Comment>{question.contents}</Comment>
-                                    </WriterCommentWrapper>
-                                </ProfileWrapper>
-                                <CommentImg src="/CommentImg.png"></CommentImg>
-                            </WriterImgWrapper>
-                            <CommentDate>
-                                {question.createdAt.slice(0, 10)}
-                            </CommentDate>
-                            <CommentDivideLine></CommentDivideLine>
+                            {isEdit === null ? (
+                                <>
+                                    <WriterImgWrapper>
+                                        <ProfileWrapper>
+                                            <ProfileImg src="/profileImg.png"></ProfileImg>
+                                            <WriterCommentWrapper>
+                                                <Writer>
+                                                    {question.user.name}
+                                                </Writer>
+
+                                                <Comment>
+                                                    {question.contents}
+                                                </Comment>
+                                            </WriterCommentWrapper>
+                                        </ProfileWrapper>
+                                        <CommentImgWrapper>
+                                            <CommentImg
+                                                onClick={() =>
+                                                    ModifyQuestion(question)
+                                                }
+                                                src="/CommentPencle.png"
+                                            ></CommentImg>
+                                            <CommentDeleteImg
+                                                onClick={() =>
+                                                    handleDeleteComment(
+                                                        question._id
+                                                    )
+                                                }
+                                                src="/X.png"
+                                            ></CommentDeleteImg>
+                                        </CommentImgWrapper>
+                                    </WriterImgWrapper>
+                                    <CommentDate>
+                                        {question.createdAt.slice(0, 10)}
+                                    </CommentDate>
+
+                                    <CommentDivideLine></CommentDivideLine>
+                                </>
+                            ) : (
+                                <>
+                                    <WriterImgWrapper>
+                                        <ProfileWrapper>
+                                            <ProfileImg src="/profileImg.png"></ProfileImg>
+                                        </ProfileWrapper>
+                                        <WriterCommentWrapper>
+                                            <Writer>
+                                                {question.user.name}
+                                            </Writer>
+
+                                            <UpdateBox>
+                                                <UpdataCommnetBox
+                                                    type="text"
+                                                    name="contents"
+                                                    defaultValue={
+                                                        isEdit.contents
+                                                    }
+                                                    onChange={handeChangeInput}
+                                                ></UpdataCommnetBox>
+                                                <UpdateDivideLine></UpdateDivideLine>
+                                                <UpdateButtonWrapper>
+                                                    <UpdateLength>
+                                                        46/100
+                                                    </UpdateLength>
+                                                    <UpdateButton
+                                                        onClick={
+                                                            handleUpdateComment
+                                                        }
+                                                    >
+                                                        수정하기
+                                                    </UpdateButton>
+                                                </UpdateButtonWrapper>
+                                            </UpdateBox>
+
+                                            <CommentDivideLine></CommentDivideLine>
+                                        </WriterCommentWrapper>
+                                    </WriterImgWrapper>
+                                </>
+                            )}
                         </div>
                     );
                 })}

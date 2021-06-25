@@ -324,3 +324,32 @@ export const DaumXimgWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
+export const DetailAdress = styled.div`
+    width: 100px;
+    height: 24px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 16px;
+`;
+
+export const CancleButton = styled.div`
+    width: 179px;
+    height: 52px;
+    background-color: #bdbdbd;
+    border: none;
+    font-size: 16px;
+    font-weight: 550;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 40px;
+    margin-left: 300px;
+`;
+
+export const UpdataButtonWrapper = styled.div`
+    width: 996px;
+    display: flex;
+    flex-direction: row;
+`;
