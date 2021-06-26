@@ -28,12 +28,15 @@ export default function ItemEnrollemnt() {
         variables: {useditemId: String(router.query.id)},
     });
     const [click, setClick] = useState(false);
+
     const [input, setInput] = useState(initInput);
 
     useEffect(() => {
         if (updata) {
-            const inputs = {...input};
-            inputs.contents = updata.fetchUseditem.contents;
+            const inputs = {...updata.fetchUseditem};
+
+            // inputs.name = updata.fetchUseditem.name;
+            // inputs.contents = updata.fetchUseditem.contents;
 
             setInput(inputs);
         }
@@ -78,6 +81,8 @@ export default function ItemEnrollemnt() {
     };
 
     const handleUpdateItem = async () => {
+        const tags = typeof input.tags === 'string' ? [input.tags] : input.tags;
+
         try {
             const result = await updateUseditem({
                 variables: {
@@ -86,13 +91,13 @@ export default function ItemEnrollemnt() {
                         remarks: input.remarks,
                         contents: input.contents,
                         price: Number(input.price),
-                        tags: [input.tags],
+                        tags: tags,
                     },
                     useditemId: String(router.query.id),
                 },
             });
             alert('상품 수정');
-            console.log(result);
+
             //@ts-ignore
             router.push(`/detail/${result.data.updateUseditem._id}`);
         } catch (error) {
@@ -131,7 +136,6 @@ export default function ItemEnrollemnt() {
         console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
-    console.log(input);
     return (
         <ItemEnrollemntUI
             handleClickCreateUsedItem={handleClickCreateUsedItem}

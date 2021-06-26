@@ -27,6 +27,7 @@ import {
     UpdateLength,
     UpdateButton,
     UpdateButtonWrapper,
+    UpdateCommentDivideLine,
 } from './Comment.style';
 
 export default function CommentUI({
@@ -65,7 +66,7 @@ export default function CommentUI({
                 {data?.fetchUseditemQuestions?.map((question, key) => {
                     return (
                         <div key={key}>
-                            {isEdit === null ? (
+                            {isEdit?._id !== question._id ? (
                                 <>
                                     <WriterImgWrapper>
                                         <ProfileWrapper>
@@ -101,7 +102,7 @@ export default function CommentUI({
                                         {question.createdAt.slice(0, 10)}
                                     </CommentDate>
 
-                                    <CommentDivideLine></CommentDivideLine>
+                                    <UpdateCommentDivideLine></UpdateCommentDivideLine>
                                 </>
                             ) : (
                                 <>
@@ -109,7 +110,7 @@ export default function CommentUI({
                                         <ProfileWrapper>
                                             <ProfileImg src="/profileImg.png"></ProfileImg>
                                         </ProfileWrapper>
-                                        <WriterCommentWrapper>
+                                        <WriterCommentWrapper key={data._id}>
                                             <Writer>
                                                 {question.user.name}
                                             </Writer>
@@ -123,7 +124,6 @@ export default function CommentUI({
                                                     }
                                                     onChange={handeChangeInput}
                                                 ></UpdataCommnetBox>
-                                                <UpdateDivideLine></UpdateDivideLine>
                                                 <UpdateButtonWrapper>
                                                     <UpdateLength>
                                                         46/100
@@ -137,8 +137,6 @@ export default function CommentUI({
                                                     </UpdateButton>
                                                 </UpdateButtonWrapper>
                                             </UpdateBox>
-
-                                            <CommentDivideLine></CommentDivideLine>
                                         </WriterCommentWrapper>
                                     </WriterImgWrapper>
                                 </>

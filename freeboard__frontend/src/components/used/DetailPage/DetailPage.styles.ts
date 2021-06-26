@@ -216,3 +216,11 @@ export const ButtonWrapper = styled.div`
 export const MoneyCountWrapper = styled.div`
     width: 792px;
 `;
+
+export const LayoutUIWrapper = styled.div`
+    max-width: 400px;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+`;

@@ -30,7 +30,9 @@ import {
     ButtonWrapper,
     ContentsWrapper,
     MoneyCountWrapper,
+    LayoutUIWrapper,
 } from './DetailPage.styles';
+import LayoutUI from '../Carousel/Carousel.presenter';
 
 export default function DetailPageUI({
     data,
@@ -75,7 +77,10 @@ export default function DetailPageUI({
             <MoneyCountWrapper>
                 <MoneyCount>{data?.fetchUseditem.price}원</MoneyCount>
             </MoneyCountWrapper>
-            <ItemImg src="/gtap.png"></ItemImg>
+            <LayoutUIWrapper>
+                <LayoutUI />
+            </LayoutUIWrapper>
+            {/* <ItemImg src="/gtap.png"></ItemImg>
             <ItemSmallImgWrapper>
                 <ItemSmallImg
                     style={{paddingRight: 24}}
@@ -90,7 +95,7 @@ export default function DetailPageUI({
                     src="/galt3.png"
                 ></ItemSmallImg>
                 <ItemSmallImg src="/galt4.png"></ItemSmallImg>
-            </ItemSmallImgWrapper>
+            </ItemSmallImgWrapper> */}
             <ContentsWrapper>
                 <Contents
                     dangerouslySetInnerHTML={{

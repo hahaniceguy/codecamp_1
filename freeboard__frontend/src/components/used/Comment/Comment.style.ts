@@ -160,16 +160,18 @@ export const UpdateWrapper = styled.div`
 export const UpdateBox = styled.div`
     width: 1140px;
     width: 117px;
+    margin-top: 6px;
 `;
 
 export const UpdataCommnetBox = styled.input`
     width: 1140px;
     height: 64px;
     padding-left: 20px;
-    padding-top: 20px;
     font-size: 16px;
     font-weight: 400;
     color: #4f4f4f;
+    border: 1px solid #bdbdbd;
+    border-bottom: none;
 `;
 
 export const UpdateDivideLine = styled.div`
@@ -202,6 +204,15 @@ export const UpdateButton = styled.div`
 
 export const UpdateButtonWrapper = styled.div`
     width: 1140px;
+    /* height: 52px; */
     display: flex;
     flex-direction: row;
+    border: 1px solid lightgray;
+`;
+
+export const UpdateCommentDivideLine = styled.div`
+    max-width: 1200px;
+    width: 100%;
+    border-bottom: 1px solid #bdbdbd;
+    margin-top: 20px;
 `;
