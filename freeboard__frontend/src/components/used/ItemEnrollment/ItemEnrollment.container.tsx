@@ -10,6 +10,7 @@ import {
     CREATE_USED_ITEM,
     FETCH_USED_ITEM,
     UPDATE_USED_ITEM,
+    UPLOAD_FILE,
 } from './ItemEnrollment.queries';
 
 const initInput = {
@@ -18,12 +19,15 @@ const initInput = {
     contents: '',
     price: '',
     tags: '',
+    images: [''],
 };
 
 export default function ItemEnrollemnt() {
     const router = useRouter();
+    const [myImg, setMyImg] = useState('');
     const [createUseditem] = useMutation(CREATE_USED_ITEM);
     const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
+    const [uploadFile] = useMutation(UPLOAD_FILE);
     const {data: updata} = useQuery(FETCH_USED_ITEM, {
         variables: {useditemId: String(router.query.id)},
     });
@@ -34,18 +38,37 @@ export default function ItemEnrollemnt() {
     useEffect(() => {
         if (updata) {
             const inputs = {...updata.fetchUseditem};
-
-            // inputs.name = updata.fetchUseditem.name;
-            // inputs.contents = updata.fetchUseditem.contents;
-
             setInput(inputs);
         }
     }, [updata]);
+
+    const onChangeFile = async (e) => {
+        const file = e.target.files[0];
+
+        const {data} = await uploadFile({variables: {file}});
+        setMyImg(`https://storage.cloud.google.com/${data.uploadFile.url}`);
+        setInput({
+            ...input,
+            images: [`https://storage.cloud.google.com/${data.uploadFile.url}`],
+        });
+        // const reader = new FileReader();
+        // reader.readAsDataURL(file);
+        // reader.onload = (event) => {
+        //     setMyImg(String(event.target.result));
+        // };
+    };
+    console.log(myImg, 'img');
+
+    const imgRef = useRef<HTMLInputElement>();
 
     const saveContents = (contents) => {
         const inputs = {...input};
         inputs.contents = contents;
         setInput(inputs);
+    };
+
+    const onClickUpload = () => {
+        imgRef.current?.click();
     };
 
     const handleChangeInput = (event) => {
@@ -70,11 +93,12 @@ export default function ItemEnrollemnt() {
                         contents: input.contents,
                         price: Number(input.price),
                         tags: [input.tags],
+                        images: input.images,
                     },
                 },
             });
             alert('상품 등록');
-            router.push(`/ItemEnrollment`);
+            router.push(`/Itemlist`);
         } catch (error) {
             alert(error.message);
         }
@@ -150,6 +174,10 @@ export default function ItemEnrollemnt() {
             updata={updata}
             handleUpdateItem={handleUpdateItem}
             handleCancle={handleCancle}
+            onChangeFile={onChangeFile}
+            imgRef={imgRef}
+            onClickUpload={onClickUpload}
+            myImg={myImg}
         ></ItemEnrollemntUI>
     );
 }

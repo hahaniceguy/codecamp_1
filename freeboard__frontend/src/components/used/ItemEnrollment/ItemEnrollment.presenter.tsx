@@ -64,6 +64,10 @@ export default function ItemEnrollemntUI({
     input,
     handleUpdateItem,
     handleCancle,
+    onChangeFile,
+    imgRef,
+    onClickUpload,
+    myImg,
 }) {
     return (
         <Wrapper>
@@ -152,12 +156,24 @@ export default function ItemEnrollemntUI({
                 </TradeNaviWrapper>
                 <Picture>사진 첨부</Picture>
                 <PictureWrapper>
-                    <PictureImg src="/galt2.png"></PictureImg>
-                    <XImg src="/X.png"></XImg>
+                    {myImg ? (
+                        <>
+                            <PictureImg src={myImg}></PictureImg>
+                            <XImg src="/X.png"></XImg>
+                        </>
+                    ) : (
+                        <></>
+                    )}
                     <ImgBox>
-                        <Plus>
+                        <Plus onClick={onClickUpload}>
                             +<br /> Upload
                         </Plus>
+                        <input
+                            ref={imgRef}
+                            type="file"
+                            onChange={onChangeFile}
+                            style={{display: 'none'}}
+                        ></input>
                     </ImgBox>
                 </PictureWrapper>
                 <MainPicture>메인 사진 설정</MainPicture>
