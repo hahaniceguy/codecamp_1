@@ -19,7 +19,7 @@ const initInput = {
     contents: '',
     price: '',
     tags: '',
-    images: [''],
+    images: [],
 };
 
 export default function ItemEnrollemnt() {
@@ -44,13 +44,20 @@ export default function ItemEnrollemnt() {
 
     const onChangeFile = async (e) => {
         const file = e.target.files[0];
+        if (file !== undefined) {
+            const {data} = await uploadFile({variables: {file}});
+            setMyImg(`https://storage.cloud.google.com/${data.uploadFile.url}`);
 
-        const {data} = await uploadFile({variables: {file}});
-        setMyImg(`https://storage.cloud.google.com/${data.uploadFile.url}`);
-        setInput({
-            ...input,
-            images: [`https://storage.cloud.google.com/${data.uploadFile.url}`],
-        });
+            const inputs = {...input};
+            inputs.images.push(
+                `https://storage.cloud.google.com/${data.uploadFile.url}`
+            );
+            setInput(inputs);
+        }
+        // setInput({
+        //     ...input,
+        //     images: [`https://storage.cloud.google.com/${data.uploadFile.url}`],
+        // });
         // const reader = new FileReader();
         // reader.readAsDataURL(file);
         // reader.onload = (event) => {
@@ -58,6 +65,26 @@ export default function ItemEnrollemnt() {
         // };
     };
     console.log(myImg, 'img');
+    console.log(input);
+
+    const onClickDeleteImg = (idx) => {
+        if (input.images[idx] !== undefined) {
+            let inputs = {...input};
+            inputs.images[idx] = null;
+
+            inputs.images = inputs.images.filter((el) => el !== null);
+            setInput(inputs);
+            // setInput({
+            //     ...input,
+            //     images: input.images.splice((Number(idx), 1)),
+            // });
+        }
+        // setMyImg(String(['']));
+        // setInput({
+        //     ...input,
+        //     images: [''],
+        // });
+    };
 
     const imgRef = useRef<HTMLInputElement>();
 
@@ -69,6 +96,9 @@ export default function ItemEnrollemnt() {
 
     const onClickUpload = () => {
         imgRef.current?.click();
+        // for (let i = 0; i <= 4; i++) {
+        //     initInput.images.length === i;
+        // }
     };
 
     const handleChangeInput = (event) => {
@@ -97,6 +127,8 @@ export default function ItemEnrollemnt() {
                     },
                 },
             });
+            console.log(result);
+
             alert('상품 등록');
             router.push(`/Itemlist`);
         } catch (error) {
@@ -165,7 +197,7 @@ export default function ItemEnrollemnt() {
             handleClickCreateUsedItem={handleClickCreateUsedItem}
             handleChangeInput={handleChangeInput}
             saveContents={saveContents}
-            input={input}
+            inputData={input}
             handleComplete={handleComplete}
             click={click}
             haleClickOn={haleClickOn}
@@ -178,6 +210,7 @@ export default function ItemEnrollemnt() {
             imgRef={imgRef}
             onClickUpload={onClickUpload}
             myImg={myImg}
+            onClickDeleteImg={onClickDeleteImg}
         ></ItemEnrollemntUI>
     );
 }

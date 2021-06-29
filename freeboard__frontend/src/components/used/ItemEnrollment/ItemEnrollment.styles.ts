@@ -179,6 +179,9 @@ export const PictureImg = styled.img`
 export const XImg = styled.img`
     width: 14px;
     height: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 25px;
 `;
 
 export const ImgBox = styled.div`
@@ -253,7 +256,7 @@ export const TradeMapWrapper = styled.div`
 `;
 
 export const PictureWrapper = styled.div`
-    width: 386px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     margin-bottom: 40px;

@@ -19,9 +19,9 @@ export default function CommentUD({data}) {
         contents: '',
     });
 
-    const handleIsUpdate = () => {
-        setIsUpdata((prev) => !prev);
-    };
+    // const handleIsUpdate = () => {
+    //     setIsUpdata((prev) => !prev);
+    // };
 
     const handleChangeCommentInput = (e) => {
         setInput((prev) => ({
@@ -51,7 +51,6 @@ export default function CommentUD({data}) {
             alert(error.message);
         }
     };
-    
 
     return (
         <>

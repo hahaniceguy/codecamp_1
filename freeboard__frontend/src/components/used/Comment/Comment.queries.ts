@@ -60,3 +60,22 @@ export const DELETE_USEDITEM_QUESTION = gql`
         deleteUseditemQuestion(useditemQuestionId: $useditemQuestionId)
     }
 `;
+
+export const CREATE_USEDITEM_QUESTIONANSWER = gql`
+    mutation createUseditemQuestionAnswer(
+        $createUseditemQuestionAnswerInput: CreateUseditemQuestionAnswerInput!
+        $useditemQuestionId: ID!
+    ) {
+        createUseditemQuestionAnswer(
+            createUseditemQuestionAnswerInput: $createUseditemQuestionAnswerInput
+            useditemQuestionId: $useditemQuestionId
+        ) {
+            _id
+            contents
+            useditemQuestion
+            user {
+                _id
+            }
+        }
+    }
+`;

@@ -78,7 +78,7 @@ export default function DetailPageUI({
                 <MoneyCount>{data?.fetchUseditem.price}원</MoneyCount>
             </MoneyCountWrapper>
             <LayoutUIWrapper>
-                <LayoutUI />
+                <LayoutUI imagesData={data?.fetchUseditem?.images} />
             </LayoutUIWrapper>
             {/* <ItemImg src="/gtap.png"></ItemImg>
             <ItemSmallImgWrapper>

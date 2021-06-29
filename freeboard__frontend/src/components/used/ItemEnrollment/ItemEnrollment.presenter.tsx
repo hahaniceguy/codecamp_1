@@ -61,13 +61,14 @@ export default function ItemEnrollemntUI({
     handleClickOff,
     hostRef,
     updata,
-    input,
+    inputData,
     handleUpdateItem,
     handleCancle,
     onChangeFile,
     imgRef,
     onClickUpload,
     myImg,
+    onClickDeleteImg,
 }) {
     return (
         <Wrapper>
@@ -98,7 +99,7 @@ export default function ItemEnrollemntUI({
                     <ReactQuill
                         style={{height: 250}}
                         onChange={saveContents}
-                        value={input.contents}
+                        value={inputData.contents}
                     />
                 </ReactQuillWrapper>
                 {/* <ItemExplanationBox
@@ -156,25 +157,43 @@ export default function ItemEnrollemntUI({
                 </TradeNaviWrapper>
                 <Picture>사진 첨부</Picture>
                 <PictureWrapper>
-                    {myImg ? (
+                    {inputData?.images.map((img, key) => {
+                        return (
+                            <>
+                                <PictureImg src={img}></PictureImg>
+                                <XImg
+                                    onClick={() => onClickDeleteImg(key)}
+                                    src="/X.png"
+                                ></XImg>
+                            </>
+                        );
+                    })}
+
+                    {/* {myImg ? (
                         <>
                             <PictureImg src={myImg}></PictureImg>
-                            <XImg src="/X.png"></XImg>
+                            <XImg
+                                onClick={onClickDeleteImg}
+                                src="/X.png"
+                            ></XImg>
                         </>
                     ) : (
                         <></>
+                    )} */}
+
+                    {inputData?.images?.length <= 3 && (
+                        <ImgBox>
+                            <Plus onClick={onClickUpload}>
+                                +<br /> Upload
+                            </Plus>
+                            <input
+                                ref={imgRef}
+                                type="file"
+                                onChange={onChangeFile}
+                                style={{display: 'none'}}
+                            ></input>
+                        </ImgBox>
                     )}
-                    <ImgBox>
-                        <Plus onClick={onClickUpload}>
-                            +<br /> Upload
-                        </Plus>
-                        <input
-                            ref={imgRef}
-                            type="file"
-                            onChange={onChangeFile}
-                            style={{display: 'none'}}
-                        ></input>
-                    </ImgBox>
                 </PictureWrapper>
                 <MainPicture>메인 사진 설정</MainPicture>
                 <ButtonWrapper>

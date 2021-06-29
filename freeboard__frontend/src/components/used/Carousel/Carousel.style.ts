@@ -13,8 +13,8 @@ export const CarouselImgSmall = styled.img`
 export const Wrapper = styled.div`
     overflow: hidden;
     height: 400px;
-    /* width: 100%;
-    max-width: 400px;
+    width: 100%;
+    /* max-width: 400px;
     height: 400px;
     display: flex;
     align-items: center;
